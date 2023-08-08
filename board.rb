@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'player'
 
 class Board
@@ -12,7 +10,7 @@ class Board
   end
 
   def display_board
-    horizontal_line = "#{'+---' * 3}+"
+    horizontal_line = '+---' * 3 + '+'
 
     @board.each_with_index do |row, _index|
       puts horizontal_line

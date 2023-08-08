@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'board'
 require_relative 'player'
 
@@ -24,7 +22,7 @@ class Game
     @player2_name = gets.chomp
     @player2_symbol = @player1_symbol == 'X' ? 'O' : 'X'
     @player2 = Player.new(@player2_name, @player2_symbol)
-    @current_player = @player1 # Set the current player to player1 initially
+    @current_player = @player1  # Set the current player to player1 initially
 
     puts ''
     puts "Thank you, #{@player1_name} is #{@player1_symbol} and #{@player2_name} is #{@player2_symbol}."
@@ -50,7 +48,7 @@ class Game
 
     win_combinations.any? do |combo|
       a, b, c = combo
-      board_state[a] == board_state[b] && board_state[b] == board_state[c] && %w[X O].include?(board_state[a])
+      board_state[a] == board_state[b] && board_state[b] == board_state[c] && ['X', 'O'].include?(board_state[a])
     end
   end
 
