@@ -1,6 +1,5 @@
-# Represents each player participating in the game.
-# Stores player-specific information, such as their name and assigned symbol (X or O).
-# Can have methods to prompt the player for their move or handle other player-related tasks.
+# frozen_string_literal: true
+
 class Player
   attr_accessor :name, :symbol
 
@@ -9,17 +8,30 @@ class Player
     @symbol = symbol
   end
 
-  def move(board)
-    # Implement the logic to get the player's move (input) and update the board
-    # The 'board' parameter allows the player to interact with the game board
-    # and update it based on their move.
-  end
-
   def self.validate_symbol(symbol)
-    until ['X', 'O'].include?(symbol.upcase)
+    until %w[X O].include?(symbol.upcase)
       puts 'Invalid symbol! Please enter either "X" or "O".'
       symbol = gets.chomp
     end
     symbol.upcase
+  end
+
+  def move(board)
+    loop do
+      puts "#{@name}, it's your turn."
+      puts "Please enter the cell number (0-8) where you want to place your symbol (#{@symbol})."
+      position = gets.chomp.to_i
+
+      if board.valid_move?(position)
+        break if board.update_cell(position, @symbol)
+
+        puts "Sorry, position #{position} is not available. Please make a different selection."
+
+      else
+        puts 'Invalid move! Please enter a number between 0 and 8 for an empty cell.'
+      end
+    end
+
+    board.display_board
   end
 end
